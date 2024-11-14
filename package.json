@@ -1,0 +1,44 @@
+{
+  "name": "tesztverseny",
+  "version": "1.0.0",
+  "main": "App.js",
+  "scripts": {
+    "start": "node ./dist/App.js",
+    "dev": "nodemon",
+    "compile": "tsc",
+    "test": "jest --watchAll"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.5.2",
+    "nodemon": "^3.1.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.3"
+  },
+  "jest": {
+        "roots": [
+            "<rootDir>/src"
+        ],
+        "preset": "ts-jest",
+        "verbose": true,
+        "testEnvironment": "node",
+        "transform": {
+            "^.+\\.ts$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|js)$",
+        "moduleFileExtensions": [
+            "ts",
+            "js",
+            "json",
+            "node"
+        ]
+  }
+}
