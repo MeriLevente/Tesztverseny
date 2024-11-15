@@ -12,4 +12,8 @@ export default class Solution{
                 this.rightGuesses = x;
         })
     }
+
+    countcontenders(): number{
+        return this.contenders.length;
+    }
 }
