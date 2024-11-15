@@ -19,8 +19,9 @@ function content(req, res) {
     res.write("<body><form><pre>");
     // Kezd a kódolást innen -->
     // npm run dev  --> http://localhost:8080/
-    const m = new Solution_1.default();
-    res.write(`<p>${m.helloWorld()}</p>`);
+    const sol = new Solution_1.default("valaszok.txt");
+    res.write(`<p> ${sol.contenders.length} </p>`);
+    res.write(`<p> ${sol.rightGuesses} </p>`);
     res.write("</pre></form></body></html>");
     res.end();
 }
