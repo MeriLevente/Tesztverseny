@@ -1,16 +1,24 @@
 import fs from "fs"
 import Contender from "./Contender"
-import { get } from "http"
+
+interface Statistic{
+    count: number,
+    percentage: number
+}
 export default class Solution{
     #contenders: Contender[] = []
-    rightGuesses: string = ""
+    #rightGuesses: string = ""
+    
+    get numberOfRound(): number{
+        return this.#rightGuesses.trim().length
+    }
 
     constructor(source: string) {
         fs.readFileSync(source).toString().split("\n").forEach(x=> {
             if(x != "" && x.includes(" "))
                 this.#contenders.push(new Contender(x.trim()));
             else if(x != "")
-                this.rightGuesses = x;
+                this.#rightGuesses = x;
         })
     }
 
@@ -18,7 +26,7 @@ export default class Solution{
         return this.#contenders.length;
     }
 
-    getContenderById(id: string): Contender{
+    private getContenderById(id: string): Contender{
         return this.#contenders.filter(x => x.Id == id.toUpperCase())[0]
     }
 
@@ -33,7 +41,7 @@ export default class Solution{
         } return ""
     }
     checkGuesses(id:string): string{
-        let result: string = "\n 4. feladata: \n" + this.rightGuesses + "\n"
+        let result: string = "\n 4. feladata: \n" + this.#rightGuesses + "\n"
         if(this.getContenderById(id) == null)
         {
             console.log("Nincs ilyen versenyző!")
@@ -42,7 +50,7 @@ export default class Solution{
         else
         {        this.getContenderById(id).Guesses.split("").forEach(x => {
             for(let i = 0; i < x.length; i++)
-                if(x[i] == this.rightGuesses[i])
+                if(x[i] == this.#rightGuesses[i])
                 {
                     console.log(result)
                     result += "+"
@@ -56,12 +64,12 @@ export default class Solution{
         return result
     }}
 
-    getStatisticsByInput(round: string): number{
+    getStatisticsByInput(round: string): Statistic | null {
         let correctContenders: number = 0
         for (const c of this.#contenders) {
-            if(c.Guesses[Number(round)-1] === this.rightGuesses[Number(round)-1])
+            if(c.Guesses[Number(round)-1] === this.#rightGuesses[Number(round)-1])
                 correctContenders++;
         }
-        return correctContenders;
+        return {count: correctContenders, percentage: Number(((correctContenders / this.countcontenders()) * 100).toFixed(2))};
     }
 }

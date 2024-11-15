@@ -7,6 +7,7 @@ exports.default = content;
 const Solution_1 = __importDefault(require("./Solution"));
 const url_1 = __importDefault(require("url"));
 function content(req, res) {
+    var _a, _b;
     // Weboldal inicializálása + head rész:
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write("<!DOCTYPE html>");
@@ -26,15 +27,20 @@ function content(req, res) {
     if (inputId == null)
         inputId = "";
     let inputRound = params.get("round");
-    if (inputId == null)
-        inputId = "";
+    if (inputRound == null)
+        inputRound = "";
     res.write('1. feladat: Az adatok beolvasása');
     res.write('\n2.feladat: a vetélkedőn ' + sol.countcontenders() + ' versenyző indult');
     res.write(`\n3. feladat: A versenyző azonosítója = <input type='text' name='id' value='${inputId}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
     res.write(`\n${sol.getGuessesFromInputId(inputId)}`);
     res.write(sol.checkGuesses(inputId));
     res.write(`\n5. feladat: A feladat sorszáma = <input type='text' name='round' value='${inputRound}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
-    res.write(`${sol.getStatisticsByInput(inputRound)}`);
+    if (inputRound != "") {
+        if (!parseInt(inputRound) || Number(inputRound) <= 0 || Number(inputRound) > sol.numberOfRound)
+            res.write('\n Hibásan adta meg a fordulót!');
+        else
+            res.write(`\nA feladatra ${(_a = sol.getStatisticsByInput(inputRound)) === null || _a === void 0 ? void 0 : _a.count} fő, a versenyzők ${(_b = sol.getStatisticsByInput(inputRound)) === null || _b === void 0 ? void 0 : _b.percentage}%-a adott helyes választ.`);
+    }
     res.write("</pre></form></body></html>");
     res.end();
 }
