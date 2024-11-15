@@ -33,5 +33,25 @@ class Solution {
         }
         return "";
     }
+    checkGuesses(id) {
+        let result = "\n 4. feladata: \n" + this.rightGuesses + "\n";
+        if (this.getContenderById(id) == null) {
+            console.log("Nincs ilyen versenyző!");
+            return "";
+        }
+        else {
+            this.getContenderById(id).Guesses.split("").forEach(x => {
+                for (let i = 0; i < x.length; i++)
+                    if (x[i] == this.rightGuesses[i]) {
+                        console.log(result);
+                        result += "+";
+                    }
+                    else {
+                        result += " ";
+                    }
+            });
+            return result;
+        }
+    }
 }
 exports.default = Solution;
