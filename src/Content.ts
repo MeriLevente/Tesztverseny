@@ -29,6 +29,7 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     res.write('\n2.feladat: a vetélkedőn ' + sol.countcontenders() + ' versenyző indult')
     res.write(`\n3. feladat: A versenyző azonosítója = <input type='text' name='id' value='${inputId}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
     res.write(`\n${sol.getGuessesFromInputId(inputId)}`)
+    res.write(sol.chechGuesses(inputId))
    
     res.write("</pre></form></body></html>");
     res.end();
