@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Megoldas {
+class Solution {
     helloWorld() {
-        return " --Hello World!--";
+        return "-- Hello World! --";
     }
     constructor() {
     }
 }
-exports.default = Megoldas;
+exports.default = Solution;

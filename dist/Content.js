@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = content;
-const Megoldas_1 = __importDefault(require("./Megoldas"));
+const Solution_1 = __importDefault(require("./Solution"));
 function content(req, res) {
     // Weboldal inicializálása + head rész:
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
@@ -19,7 +19,7 @@ function content(req, res) {
     res.write("<body><form><pre>");
     // Kezd a kódolást innen -->
     // npm run dev  --> http://localhost:8080/
-    const m = new Megoldas_1.default();
+    const m = new Solution_1.default();
     res.write(`<p>${m.helloWorld()}</p>`);
     res.write("</pre></form></body></html>");
     res.end();

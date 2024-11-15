@@ -1,5 +1,6 @@
 ﻿import http from "http"; // https://nodejs.org/docs/latest-v14.x/api/http.html
-import Megoldas from "./Megoldas";
+import Solution from "./Solution";
+
 
 export default function content(req: http.IncomingMessage, res: http.ServerResponse): void {
     
@@ -18,7 +19,7 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     // Kezd a kódolást innen -->
     // npm run dev  --> http://localhost:8080/
 
-   const m: Megoldas = new Megoldas()
+   const m: Solution = new Solution()
 
    res.write(`<p>${m.helloWorld()}</p>`)
    
