@@ -16,5 +16,8 @@ class Solution {
                 this.rightGuesses = x;
         });
     }
+    countcontenders() {
+        return this.contenders.length;
+    }
 }
 exports.default = Solution;
