@@ -23,13 +23,18 @@ function content(req, res) {
     const params = new url_1.default.URL(req.url, `http://${req.headers.host}/`).searchParams;
     const sol = new Solution_1.default("valaszok.txt");
     let inputId = params.get("id");
-    if (inputId == null || inputId.length > 5)
+    if (inputId == null)
+        inputId = "";
+    let inputRound = params.get("round");
+    if (inputId == null)
         inputId = "";
     res.write('1. feladat: Az adatok beolvasása');
     res.write('\n2.feladat: a vetélkedőn ' + sol.countcontenders() + ' versenyző indult');
     res.write(`\n3. feladat: A versenyző azonosítója = <input type='text' name='id' value='${inputId}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
     res.write(`\n${sol.getGuessesFromInputId(inputId)}`);
-    res.write(sol.chechGuesses(inputId));
+    res.write(sol.checkGuesses(inputId));
+    res.write(`\n5. feladat: A feladat sorszáma = <input type='text' name='round' value='${inputRound}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
+    res.write(`${sol.getStatisticsByInput(inputRound)}`);
     res.write("</pre></form></body></html>");
     res.end();
 }

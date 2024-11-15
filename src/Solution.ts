@@ -2,27 +2,27 @@ import fs from "fs"
 import Contender from "./Contender"
 import { get } from "http"
 export default class Solution{
-    contenders: Contender[] = []
+    #contenders: Contender[] = []
     rightGuesses: string = ""
 
     constructor(source: string) {
         fs.readFileSync(source).toString().split("\n").forEach(x=> {
             if(x != "" && x.includes(" "))
-                this.contenders.push(new Contender(x.trim()));
+                this.#contenders.push(new Contender(x.trim()));
             else if(x != "")
                 this.rightGuesses = x;
         })
     }
 
     countcontenders(): number{
-        return this.contenders.length;
+        return this.#contenders.length;
     }
 
     getContenderById(id: string): Contender{
-        return this.contenders.filter(x => x.Id == id.toUpperCase())[0]
+        return this.#contenders.filter(x => x.Id == id.toUpperCase())[0]
     }
 
-    getGuessesFromInputId(inputId: string): string | undefined{
+    getGuessesFromInputId(inputId: string): string{
         if(inputId != ""){
             if(inputId.length > 5)
                 return "A versenyző kódja nem lehet 5 karakternél több!"
@@ -55,4 +55,13 @@ export default class Solution{
         })
         return result
     }}
+
+    getStatisticsByInput(round: string): number{
+        let correctContenders: number = 0
+        for (const c of this.#contenders) {
+            if(c.Guesses[Number(round)-1] === this.rightGuesses[Number(round)-1])
+                correctContenders++;
+        }
+        return correctContenders;
+    }
 }

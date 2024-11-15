@@ -1,26 +1,32 @@
 "use strict";
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _Solution_contenders;
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const Contender_1 = __importDefault(require("./Contender"));
 class Solution {
     constructor(source) {
-        this.contenders = [];
+        _Solution_contenders.set(this, []);
         this.rightGuesses = "";
         fs_1.default.readFileSync(source).toString().split("\n").forEach(x => {
             if (x != "" && x.includes(" "))
-                this.contenders.push(new Contender_1.default(x.trim()));
+                __classPrivateFieldGet(this, _Solution_contenders, "f").push(new Contender_1.default(x.trim()));
             else if (x != "")
                 this.rightGuesses = x;
         });
     }
     countcontenders() {
-        return this.contenders.length;
+        return __classPrivateFieldGet(this, _Solution_contenders, "f").length;
     }
     getContenderById(id) {
-        return this.contenders.filter(x => x.Id == id.toUpperCase())[0];
+        return __classPrivateFieldGet(this, _Solution_contenders, "f").filter(x => x.Id == id.toUpperCase())[0];
     }
     getGuessesFromInputId(inputId) {
         if (inputId != "") {
@@ -53,5 +59,14 @@ class Solution {
             return result;
         }
     }
+    getStatisticsByInput(round) {
+        let correctContenders = 0;
+        for (const c of __classPrivateFieldGet(this, _Solution_contenders, "f")) {
+            if (c.Guesses[Number(round) - 1] === this.rightGuesses[Number(round) - 1])
+                correctContenders++;
+        }
+        return correctContenders;
+    }
 }
+_Solution_contenders = new WeakMap();
 exports.default = Solution;
