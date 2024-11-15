@@ -19,9 +19,11 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     // Kezd a kódolást innen -->
     // npm run dev  --> http://localhost:8080/
 
-   const m: Solution = new Solution()
+   const sol: Solution = new Solution("valaszok.txt")
 
-   res.write(`<p>${m.helloWorld()}</p>`)
+   res.write('1. feladat: Az adatok beolvasása')
+//    res.write(`<p> ${sol.contenders.length} </p>`)
+//    res.write(`<p> ${sol.rightGuesses} </p>`)
    
     res.write("</pre></form></body></html>");
     res.end();
