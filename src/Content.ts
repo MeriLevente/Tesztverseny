@@ -21,8 +21,9 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
 
    const sol: Solution = new Solution("valaszok.txt")
 
-   res.write(`<p> ${sol.contenders.length} </p>`)
-   res.write(`<p> ${sol.rightGuesses} </p>`)
+   res.write('1. feladat: Az adatok beolvasása')
+//    res.write(`<p> ${sol.contenders.length} </p>`)
+//    res.write(`<p> ${sol.rightGuesses} </p>`)
    
     res.write("</pre></form></body></html>");
     res.end();

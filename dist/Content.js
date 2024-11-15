@@ -20,8 +20,9 @@ function content(req, res) {
     // Kezd a kódolást innen -->
     // npm run dev  --> http://localhost:8080/
     const sol = new Solution_1.default("valaszok.txt");
-    res.write(`<p> ${sol.contenders.length} </p>`);
-    res.write(`<p> ${sol.rightGuesses} </p>`);
+    res.write('1. feladat: Az adatok beolvasása');
+    //    res.write(`<p> ${sol.contenders.length} </p>`)
+    //    res.write(`<p> ${sol.rightGuesses} </p>`)
     res.write("</pre></form></body></html>");
     res.end();
 }
