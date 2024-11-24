@@ -25,3 +25,12 @@ describe("3.feladat tesztelése", ()=>{
         expect(sol.getGuessesFromInputId("AB1234")).toBe("A versenyző kódja nem lehet 5 karakternél több!")
     })
 })
+
+describe("5.feladat tesztelése", ()=>{
+    it("A felhasználó bevitt egy fordulószámot, és visszakapta a helyes válaszok számát", ()=>{
+        expect(sol.getStatisticsByInput("10")?.count).toBe(111)
+    })
+    it("A felhasználó bevitt egy fordulószámot, és visszakapta a helyes válaszok számát százalékban", ()=>{
+        expect(sol.getStatisticsByInput("10")?.percentage).toBe(36.63)
+    })
+})
