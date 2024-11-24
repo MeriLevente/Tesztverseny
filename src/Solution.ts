@@ -13,6 +13,10 @@ export default class Solution{
         return this.#rightGuesses.trim().length
     }
 
+    get getContenders(): Contender[]{
+        return this.#contenders
+    }
+
     constructor(source: string) {
         fs.readFileSync(source).toString().split("\n").forEach(x=> {
             if(x != "" && x.includes(" "))
