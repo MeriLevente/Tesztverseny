@@ -21,6 +21,9 @@ class Solution {
     get numberOfRound() {
         return __classPrivateFieldGet(this, _Solution_rightGuesses, "f").trim().length;
     }
+    get getContenders() {
+        return __classPrivateFieldGet(this, _Solution_contenders, "f");
+    }
     constructor(source) {
         _Solution_contenders.set(this, []);
         _Solution_rightGuesses.set(this, "");
@@ -75,6 +78,30 @@ class Solution {
                 correctContenders++;
         }
         return { count: correctContenders, percentage: Number(((correctContenders / this.countcontenders()) * 100).toFixed(2)) };
+    }
+    getContendersPoints(id) {
+        let points = 0;
+        let round = 1;
+        this.checkGuesses(id).split("\n")[3].split("").forEach(x => {
+            console.log(x);
+            if (x == "+" && round >= 1 && round <= 5)
+                points += 3;
+            else if (x == "+" && round >= 6 && round <= 10)
+                points += 4;
+            else if (x == "+" && round >= 11 && round <= 13)
+                points += 5;
+            else if (x == "+" && round == 14)
+                points += 6;
+            round++;
+        });
+        return points;
+    }
+    contenderpointsfile() {
+        let fileContent = "";
+        __classPrivateFieldGet(this, _Solution_contenders, "f").forEach(x => {
+            fileContent += x.Id + " " + this.getContendersPoints(x.Id) + "\n";
+        });
+        fs_1.default.writeFileSync("pontok.txt", fileContent);
     }
 }
 _Solution_contenders = new WeakMap(), _Solution_rightGuesses = new WeakMap();

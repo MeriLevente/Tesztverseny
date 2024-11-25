@@ -76,4 +76,30 @@ export default class Solution{
         }
         return {count: correctContenders, percentage: Number(((correctContenders / this.countcontenders()) * 100).toFixed(2))};
     }
+
+    getContendersPoints(id: string): number{
+        let points: number = 0
+        let round: number = 1
+        this.checkGuesses(id).split("\n")[3].split("").forEach(x => {
+            console.log(x)
+            if(x == "+" && round >= 1 && round <= 5)
+                points += 3
+            else if(x == "+" && round >= 6 && round <= 10)
+                points += 4
+            else if(x == "+" && round >= 11 && round <= 13)
+                points += 5
+            else if(x == "+" && round == 14)
+                points += 6
+            round++
+        })
+        return points
+    }
+
+    contenderpointsfile(): void{
+        let fileContent: string = ""
+        this.#contenders.forEach(x => {
+            fileContent += x.Id + " " + this.getContendersPoints(x.Id) + "\n"
+        })
+        fs.writeFileSync("pontok.txt", fileContent)
+    }
 }
