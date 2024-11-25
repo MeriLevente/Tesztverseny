@@ -8,6 +8,12 @@ describe("1.feladat tesztelése", ()=>{
     })
 })
 
+describe("2.feladat tesztelése", ()=>{
+    it("helyesen számolja meg a versenzőket", ()=>{
+        expect(sol.countcontenders()).toBe(303)
+    })
+})
+
 describe("3.feladat tesztelése", ()=>{
     it("A felhasználó bevitt egy azonosítót és a hozzátartozó válaszokat adja vissza a függvény", ()=>{
         expect(sol.getGuessesFromInputId("AB123")).toBe("BXCDBBACACADBC (a versenyző válasza)")
@@ -26,12 +32,30 @@ describe("3.feladat tesztelése", ()=>{
     })
 })
 
+describe("4.feladat tesztelése", ()=>{
+    it("A helyes választ megjeleniti a függvény", ()=>{
+        expect(sol.checkGuesses("AB123").split("\n")[2].trim()).toBe("BCCCDBBBBCDAAA")
+})
+    it("helyesen irja ki a felhasználo helyes válaszait", ()=>{
+        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + ")
+    })
+})
+
 describe("5.feladat tesztelése", ()=>{
     it("A felhasználó bevitt egy fordulószámot, és visszakapta a helyes válaszok számát", ()=>{
         expect(sol.getStatisticsByInput("10")?.count).toBe(111)
     })
     it("A felhasználó bevitt egy fordulószámot, és visszakapta a helyes válaszok számát százalékban", ()=>{
         expect(sol.getStatisticsByInput("10")?.percentage).toBe(36.63)
+    })
+})
+
+describe("6.feladat tesztelése", ()=>{
+    it("A versenyzők pontszámait helyesen számolja ki", ()=>{
+        expect(sol.getContendersPoints("AB123")).toBe(15)
+    })
+    it("Lefut e a fájl irása", ()=>{
+        expect(sol.contenderpointsfile()).toBeCalled
     })
 })
 
