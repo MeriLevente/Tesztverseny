@@ -34,3 +34,12 @@ describe("5.feladat tesztelése", ()=>{
         expect(sol.getStatisticsByInput("10")?.percentage).toBe(36.63)
     })
 })
+
+describe("7.feladat tesztelése", ()=>{
+    it("A legjobb eredményt helyesen írja ki", ()=>{
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (34 pont): GJ813")
+    })
+    it("A képernyőre kiíratás 5 sorral tér vissza", ()=>{
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(6) // split-eléskor az első adatsor is \n emiatt a vektor 0. eleme "", így a hossza 6
+    })
+})
