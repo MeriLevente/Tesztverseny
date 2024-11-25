@@ -37,3 +37,8 @@ describe("5.feladat tesztelése", () => {
         expect((_a = sol.getStatisticsByInput("10")) === null || _a === void 0 ? void 0 : _a.percentage).toBe(36.63);
     });
 });
+// describe("7.feladat tesztelése", ()=>{
+//     it("A legjobb eredményt helyesen írja ki", ()=>{
+//         expect(sol.showTheThreeBest(sol.getPointsSorted())).toBe()
+//     })
+// })
