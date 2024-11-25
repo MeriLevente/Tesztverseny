@@ -48,7 +48,7 @@ export default class Solution{
         let result: string = "\n 4. feladata: \n" + this.#rightGuesses + "\n"
         if(this.getContenderById(id) == null)
         {
-            console.log("Nincs ilyen versenyző!")
+            
             return ""
         }
         else
@@ -56,7 +56,7 @@ export default class Solution{
             for(let i = 0; i < x.length; i++)
                 if(x[i] == this.#rightGuesses[i])
                 {
-                    console.log(result)
+                    
                     result += "+"
                 }
 
@@ -81,7 +81,6 @@ export default class Solution{
         let points: number = 0
         let round: number = 1
         this.checkGuesses(id).split("\n")[3].split("").forEach(x => {
-            console.log(x)
             if(x == "+" && round >= 1 && round <= 5)
                 points += 3
             else if(x == "+" && round >= 6 && round <= 10)
@@ -101,5 +100,29 @@ export default class Solution{
             fileContent += x.Id + " " + this.getContendersPoints(x.Id) + "\n"
         })
         fs.writeFileSync("pontok.txt", fileContent)
+    }
+
+    getPointsSorted(): Contender[]{
+        let sortedContenders: Contender[] = []
+        this.#contenders.forEach(x=>{
+            x.Points = this.getContendersPoints(x.Id)
+            sortedContenders.push(x)
+        })
+        sortedContenders = sortedContenders.sort((a,b) => b.Points - a.Points)
+        return sortedContenders
+    }
+
+    showTheThreeBest(sorted: Contender[]): string{ // a feladat.pdf minta hibás, ez a jó megoldás
+        let output: string = ""
+        let placement: number = 1
+        for (let i = 0; i < sorted.length; i++) {
+            if(placement <= 3){
+                output += `\n${placement}. díj (${sorted[i].Points} pont): ${sorted[i].Id}`
+                sorted[i].Points == sorted[i + 1].Points ? placement = placement : placement += 1
+            } else{
+                return output
+            }
+        }
+        return output 
     }
 }

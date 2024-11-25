@@ -54,14 +54,12 @@ class Solution {
     checkGuesses(id) {
         let result = "\n 4. feladata: \n" + __classPrivateFieldGet(this, _Solution_rightGuesses, "f") + "\n";
         if (this.getContenderById(id) == null) {
-            console.log("Nincs ilyen versenyző!");
             return "";
         }
         else {
             this.getContenderById(id).Guesses.split("").forEach(x => {
                 for (let i = 0; i < x.length; i++)
                     if (x[i] == __classPrivateFieldGet(this, _Solution_rightGuesses, "f")[i]) {
-                        console.log(result);
                         result += "+";
                     }
                     else {
@@ -83,7 +81,6 @@ class Solution {
         let points = 0;
         let round = 1;
         this.checkGuesses(id).split("\n")[3].split("").forEach(x => {
-            console.log(x);
             if (x == "+" && round >= 1 && round <= 5)
                 points += 3;
             else if (x == "+" && round >= 6 && round <= 10)
@@ -102,6 +99,29 @@ class Solution {
             fileContent += x.Id + " " + this.getContendersPoints(x.Id) + "\n";
         });
         fs_1.default.writeFileSync("pontok.txt", fileContent);
+    }
+    getPointsSorted() {
+        let sortedContenders = [];
+        __classPrivateFieldGet(this, _Solution_contenders, "f").forEach(x => {
+            x.Points = this.getContendersPoints(x.Id);
+            sortedContenders.push(x);
+        });
+        sortedContenders = sortedContenders.sort((a, b) => b.Points - a.Points);
+        return sortedContenders;
+    }
+    showTheThreeBest(sorted) {
+        let output = "";
+        let placement = 1;
+        for (let i = 0; i < sorted.length; i++) {
+            if (placement <= 3) {
+                output += `\n${placement}. díj (${sorted[i].Points} pont): ${sorted[i].Id}`;
+                sorted[i].Points == sorted[i + 1].Points ? placement = placement : placement += 1;
+            }
+            else {
+                return output;
+            }
+        }
+        return output;
     }
 }
 _Solution_contenders = new WeakMap(), _Solution_rightGuesses = new WeakMap();
