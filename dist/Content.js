@@ -42,6 +42,8 @@ function content(req, res) {
             res.write(`\nA feladatra ${(_a = sol.getStatisticsByInput(inputRound)) === null || _a === void 0 ? void 0 : _a.count} fő, a versenyzők ${(_b = sol.getStatisticsByInput(inputRound)) === null || _b === void 0 ? void 0 : _b.percentage}%-a adott helyes választ.`);
     }
     res.write("\n6. feladat: A versenyzők pontszámának meghatározása" + sol.contenderpointsfile());
+    res.write("<br>");
+    res.write(`\n7.feladat: A verseny legjobbjai: ${sol.showTheThreeBest(sol.getPointsSorted())}`);
     res.write("</pre></form></body></html>");
     res.end();
 }

@@ -43,7 +43,8 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
             res.write(`\nA feladatra ${sol.getStatisticsByInput(inputRound)?.count} fő, a versenyzők ${sol.getStatisticsByInput(inputRound)?.percentage}%-a adott helyes választ.`)
     }
     res.write("\n6. feladat: A versenyzők pontszámának meghatározása" + sol.contenderpointsfile())
-
+    res.write("<br>")
+    res.write(`\n7.feladat: A verseny legjobbjai: ${sol.showTheThreeBest(sol.getPointsSorted())}`)
    
     res.write("</pre></form></body></html>");
     res.end();
