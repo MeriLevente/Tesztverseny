@@ -42,7 +42,7 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
         else
             res.write(`\nA feladatra ${sol.getStatisticsByInput(inputRound)?.count} fő, a versenyzők ${sol.getStatisticsByInput(inputRound)?.percentage}%-a adott helyes választ.`)
     }
-        
+    res.write("\n6. feladat: A versenyzők pontszámának meghatározása" + sol.contenderpointsfile())
 
    
     res.write("</pre></form></body></html>");
