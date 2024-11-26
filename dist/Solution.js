@@ -52,22 +52,18 @@ class Solution {
         return "";
     }
     checkGuesses(id) {
-        let result = "\n 4. feladata: \n" + __classPrivateFieldGet(this, _Solution_rightGuesses, "f") + "\n";
-        if (this.getContenderById(id) == null) {
+        let result = `\n4. feladata:\n${__classPrivateFieldGet(this, _Solution_rightGuesses, "f").trim()}\t(a helyes megoldás)\n`;
+        if (this.getContenderById(id) == null)
             return "";
-        }
         else {
-            this.getContenderById(id).Guesses.split("").forEach(x => {
-                for (let i = 0; i < x.length; i++)
-                    if (x[i] == __classPrivateFieldGet(this, _Solution_rightGuesses, "f")[i]) {
-                        result += "+";
-                    }
-                    else {
-                        result += " ";
-                    }
-            });
-            return result;
+            for (let i = 0; i < __classPrivateFieldGet(this, _Solution_rightGuesses, "f").length; i++) {
+                if (this.getContenderById(id).Guesses[i] == __classPrivateFieldGet(this, _Solution_rightGuesses, "f")[i])
+                    result += "+";
+                else
+                    result += " ";
+            }
         }
+        return result;
     }
     getStatisticsByInput(round) {
         let correctContenders = 0;

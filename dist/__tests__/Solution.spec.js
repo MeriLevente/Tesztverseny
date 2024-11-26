@@ -12,7 +12,7 @@ describe("1.feladat tesztelése", () => {
 });
 describe("2.feladat tesztelése", () => {
     it("helyesen számolja meg a versenzőket", () => {
-        expect(sol.countcontenders).toBe(303);
+        expect(sol.countcontenders()).toBe(303);
     });
 });
 describe("3.feladat tesztelése", () => {
@@ -34,10 +34,10 @@ describe("3.feladat tesztelése", () => {
 });
 describe("4.feladat tesztelése", () => {
     it("A helyes választ megjeleniti a függvény", () => {
-        expect(sol.checkGuesses("AB123").split("\n")[2]).toBe("BCCCDBBBBCDAAA");
+        expect(sol.checkGuesses("AB123").split("\n")[2].trim().split("\t")[0]).toBe("BCCCDBBBBCDAAA");
     });
     it("helyesen irja ki a felhasználo helyes válaszait", () => {
-        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + ");
+        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + "); //javítás szükséges
     });
 });
 describe("5.feladat tesztelése", () => {
@@ -50,11 +50,19 @@ describe("5.feladat tesztelése", () => {
         expect((_a = sol.getStatisticsByInput("10")) === null || _a === void 0 ? void 0 : _a.percentage).toBe(36.63);
     });
 });
+describe("6.feladat tesztelése", () => {
+    it("A versenyzők pontszámait helyesen számolja ki", () => {
+        expect(sol.getContendersPoints("AB123")).toBe(15); //javítás szükséges --> új branchbe: teszteles-javitasa, az Oktatási Hivatal kiadott megoldott pontok.txt-t hasonlísd össze a mi pontok.txt-kel
+    });
+    it("Lefut e a fájl irása", () => {
+        expect(sol.contenderpointsfile()).toBeCalled; // toHaveBeenCalled()
+    });
+});
 describe("7.feladat tesztelése", () => {
     it("A legjobb eredményt helyesen írja ki", () => {
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (34 pont): GJ813");
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (34 pont): GJ813"); //javítás szükséges
     });
     it("A képernyőre kiíratás 5 sorral tér vissza", () => {
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(6); // split-eléskor az első adatsor is \n emiatt a vektor 0. eleme "", így a hossza 6
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(6); //javítás szükséges
     });
 });
