@@ -10,6 +10,11 @@ describe("1.feladat tesztelése", () => {
         expect(sol.getContenders.length).toBeGreaterThan(0);
     });
 });
+describe("2.feladat tesztelése", () => {
+    it("helyesen számolja meg a versenzőket", () => {
+        expect(sol.countcontenders).toBe(303);
+    });
+});
 describe("3.feladat tesztelése", () => {
     it("A felhasználó bevitt egy azonosítót és a hozzátartozó válaszokat adja vissza a függvény", () => {
         expect(sol.getGuessesFromInputId("AB123")).toBe("BXCDBBACACADBC (a versenyző válasza)");
@@ -27,6 +32,14 @@ describe("3.feladat tesztelése", () => {
         expect(sol.getGuessesFromInputId("AB1234")).toBe("A versenyző kódja nem lehet 5 karakternél több!");
     });
 });
+describe("4.feladat tesztelése", () => {
+    it("A helyes választ megjeleniti a függvény", () => {
+        expect(sol.checkGuesses("AB123").split("\n")[2]).toBe("BCCCDBBBBCDAAA");
+    });
+    it("helyesen irja ki a felhasználo helyes válaszait", () => {
+        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + ");
+    });
+});
 describe("5.feladat tesztelése", () => {
     it("A felhasználó bevitt egy fordulószámot, és visszakapta a helyes válaszok számát", () => {
         var _a;
@@ -37,8 +50,11 @@ describe("5.feladat tesztelése", () => {
         expect((_a = sol.getStatisticsByInput("10")) === null || _a === void 0 ? void 0 : _a.percentage).toBe(36.63);
     });
 });
-// describe("7.feladat tesztelése", ()=>{
-//     it("A legjobb eredményt helyesen írja ki", ()=>{
-//         expect(sol.showTheThreeBest(sol.getPointsSorted())).toBe()
-//     })
-// })
+describe("7.feladat tesztelése", () => {
+    it("A legjobb eredményt helyesen írja ki", () => {
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (34 pont): GJ813");
+    });
+    it("A képernyőre kiíratás 5 sorral tér vissza", () => {
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(6); // split-eléskor az első adatsor is \n emiatt a vektor 0. eleme "", így a hossza 6
+    });
+});
