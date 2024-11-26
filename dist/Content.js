@@ -30,18 +30,24 @@ function content(req, res) {
     if (inputRound == null)
         inputRound = "";
     res.write('1. feladat: Az adatok beolvasása');
-    res.write('\n2.feladat: a vetélkedőn ' + sol.countcontenders() + ' versenyző indult');
+    res.write("<br>");
+    res.write('\n2.feladat: A vetélkedőn ' + sol.countcontenders() + ' versenyző indult.');
+    res.write("<br>");
     res.write(`\n3. feladat: A versenyző azonosítója = <input type='text' name='id' value='${inputId}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
-    res.write(`\n${sol.getGuessesFromInputId(inputId)}`);
-    res.write(sol.checkGuesses(inputId));
+    res.write(`${sol.getGuessesFromInputId(inputId)}`);
+    res.write("<br>");
+    res.write(`${sol.checkGuesses(inputId)}\t${inputId != "" ? "(a versenyző helyes válaszai)" : ""}`);
+    res.write("<br>");
     res.write(`\n5. feladat: A feladat sorszáma = <input type='text' name='round' value='${inputRound}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
     if (inputRound != "") {
         if (!parseInt(inputRound) || Number(inputRound) <= 0 || Number(inputRound) > sol.numberOfRound)
-            res.write('\n Hibásan adta meg a fordulót!');
+            res.write('Hibásan adta meg a fordulót!');
         else
-            res.write(`\nA feladatra ${(_a = sol.getStatisticsByInput(inputRound)) === null || _a === void 0 ? void 0 : _a.count} fő, a versenyzők ${(_b = sol.getStatisticsByInput(inputRound)) === null || _b === void 0 ? void 0 : _b.percentage}%-a adott helyes választ.`);
+            res.write(`A feladatra ${(_a = sol.getStatisticsByInput(inputRound)) === null || _a === void 0 ? void 0 : _a.count} fő, a versenyzők ${(_b = sol.getStatisticsByInput(inputRound)) === null || _b === void 0 ? void 0 : _b.percentage}%-a adott helyes választ.`);
     }
-    res.write("\n6. feladat: A versenyzők pontszámának meghatározása" + sol.contenderpointsfile());
+    res.write("<br>");
+    res.write("\n6. feladat: A versenyzők pontszámának meghatározása");
+    sol.contenderpointsfile();
     res.write("<br>");
     res.write(`\n7.feladat: A verseny legjobbjai: ${sol.showTheThreeBest(sol.getPointsSorted())}`);
     res.write("</pre></form></body></html>");

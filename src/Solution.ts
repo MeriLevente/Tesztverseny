@@ -44,29 +44,22 @@ export default class Solution{
             return "Ilyen versenyző nincsen!"
         } return ""
     }
-    checkGuesses(id:string): string{
-        let result: string = "\n 4. feladata: \n" + this.#rightGuesses + "\n"
-        if(this.getContenderById(id) == null)
-        {
-            
-            return ""
-        }
-        else
-        {        this.getContenderById(id).Guesses.split("").forEach(x => {
-            for(let i = 0; i < x.length; i++)
-                if(x[i] == this.#rightGuesses[i])
-                {
-                    
-                    result += "+"
-                }
 
-            else
-            {
-                result += " "
+    checkGuesses(id:string): string{
+        let result: string = `\n4. feladata:\n${this.#rightGuesses.trim()}\t(a helyes megoldás)\n`
+        if(this.getContenderById(id) == null)
+            return ""
+        else
+        { 
+            for (let i = 0; i < this.#rightGuesses.length; i++) {
+                if(this.getContenderById(id).Guesses[i] == this.#rightGuesses[i])
+                    result += "+"
+                else
+                    result += " "
             }
-        })
+        }
         return result
-    }}
+    }
 
     getStatisticsByInput(round: string): Statistic | null {
         let correctContenders: number = 0
@@ -112,7 +105,7 @@ export default class Solution{
         return sortedContenders
     }
 
-    showTheThreeBest(sorted: Contender[]): string{ // a feladat.pdf minta hibás, ez a jó megoldás
+    showTheThreeBest(sorted: Contender[]): string{
         let output: string = ""
         let placement: number = 1
         for (let i = 0; i < sorted.length; i++) {
