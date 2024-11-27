@@ -5,6 +5,7 @@ interface Statistic{
     count: number,
     percentage: number
 }
+
 export default class Solution{
     #contenders: Contender[] = []
     #rightGuesses: string = ""
@@ -15,6 +16,16 @@ export default class Solution{
 
     get getContenders(): Contender[]{
         return this.#contenders
+    }
+
+    private get getSortedByPoints(): Contender[]{
+        let sortedContenders: Contender[] = []
+        this.#contenders.forEach(x=>{
+            x.Points = this.getContendersPoints(x.Id)
+            sortedContenders.push(x)
+        })
+        sortedContenders = sortedContenders.sort((a,b) => b.Points - a.Points)
+        return sortedContenders
     }
 
     constructor(source: string) {
@@ -36,11 +47,9 @@ export default class Solution{
 
     getGuessesFromInputId(inputId: string): string{
         if(inputId != ""){
-            if(inputId.length > 5)
-                return "A versenyző kódja nem lehet 5 karakternél több!"
-            const selectedContenter = this.getContenderById(inputId)
-            if(selectedContenter != null)
-                return selectedContenter.Guesses + " (a versenyző válasza)"
+            const selectedContender = this.getContenderById(inputId)
+            if(selectedContender != null)
+                return selectedContender.Guesses + " (a versenyző válasza)"
             return "Ilyen versenyző nincsen!"
         } return ""
     }
@@ -61,7 +70,7 @@ export default class Solution{
         return result
     }
 
-    getStatisticsByInput(round: string): Statistic | null {
+    getStatisticsByInput(round: string): Statistic {
         let correctContenders: number = 0
         for (const c of this.#contenders) {
             if(c.Guesses[Number(round)-1] === this.#rightGuesses[Number(round)-1])
@@ -95,27 +104,19 @@ export default class Solution{
         fs.writeFileSync("pontok.txt", fileContent)
     }
 
-    getPointsSorted(): Contender[]{
-        let sortedContenders: Contender[] = []
-        this.#contenders.forEach(x=>{
-            x.Points = this.getContendersPoints(x.Id)
-            sortedContenders.push(x)
-        })
-        sortedContenders = sortedContenders.sort((a,b) => b.Points - a.Points)
-        return sortedContenders
-    }
+    
 
-    showTheThreeBest(sorted: Contender[]): string{
+    showTheThreeBest(): string{
         let output: string = ""
         let placement: number = 1
-        for (let i = 0; i < sorted.length; i++) {
+        for (let i = 0; i < this.getSortedByPoints.length; i++) {
             if(placement <= 3){
-                output += `\n${placement}. díj (${sorted[i].Points} pont): ${sorted[i].Id}`
-                sorted[i].Points == sorted[i + 1].Points ? placement = placement : placement += 1
+                output += `\n${placement}. díj (${this.getSortedByPoints[i].Points} pont): ${this.getSortedByPoints[i].Id}`
+                this.getSortedByPoints[i].Points == this.getSortedByPoints[i + 1].Points ? placement = placement : placement += 1
             } else{
                 return output
             }
         }
-        return output 
+        return output
     }
 }

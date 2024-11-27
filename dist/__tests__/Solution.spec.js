@@ -28,16 +28,13 @@ describe("3.feladat tesztelése", () => {
     it("A felhasználó egy olyan azonosított vitt be, ami nincs az adatok közt, függvény ezt tudatja vele", () => {
         expect(sol.getGuessesFromInputId("adaff")).toBe("Ilyen versenyző nincsen!");
     });
-    it("A felhasználó bevitt egy azonosítót, ami 5 karakternél hosszabb", () => {
-        expect(sol.getGuessesFromInputId("AB1234")).toBe("A versenyző kódja nem lehet 5 karakternél több!");
-    });
 });
 describe("4.feladat tesztelése", () => {
     it("A helyes választ megjeleniti a függvény", () => {
         expect(sol.checkGuesses("AB123").split("\n")[2].trim().split("\t")[0]).toBe("BCCCDBBBBCDAAA");
     });
     it("helyesen irja ki a felhasználo helyes válaszait", () => {
-        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + "); //javítás szükséges
+        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + ");
     });
 });
 describe("5.feladat tesztelése", () => {
@@ -52,7 +49,7 @@ describe("5.feladat tesztelése", () => {
 });
 describe("6.feladat tesztelése", () => {
     it("A versenyzők pontszámait helyesen számolja ki", () => {
-        expect(sol.getContendersPoints("AB123")).toBe(15); //javítás szükséges --> új branchbe: teszteles-javitasa, az Oktatási Hivatal kiadott megoldott pontok.txt-t hasonlísd össze a mi pontok.txt-kel
+        expect(sol.getContendersPoints("AB123")).toBe(15); //Oktatási Hivatal kiadott megoldott pontok.txt-t hasonlísd össze a mi pontok.txt-kel
     });
     it("Lefut e a fájl irása", () => {
         expect(sol.contenderpointsfile()).toBeCalled; // toHaveBeenCalled()
@@ -60,9 +57,9 @@ describe("6.feladat tesztelése", () => {
 });
 describe("7.feladat tesztelése", () => {
     it("A legjobb eredményt helyesen írja ki", () => {
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (34 pont): GJ813"); //javítás szükséges
+        expect(sol.showTheThreeBest().split("\n")[1].trim()).toBe("1. díj (56 pont): JO001");
     });
     it("A képernyőre kiíratás 5 sorral tér vissza", () => {
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(6); //javítás szükséges
+        expect(sol.showTheThreeBest().split("\n").length).toBe(5);
     });
 });

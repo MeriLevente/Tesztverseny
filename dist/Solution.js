@@ -24,6 +24,15 @@ class Solution {
     get getContenders() {
         return __classPrivateFieldGet(this, _Solution_contenders, "f");
     }
+    get getSortedByPoints() {
+        let sortedContenders = [];
+        __classPrivateFieldGet(this, _Solution_contenders, "f").forEach(x => {
+            x.Points = this.getContendersPoints(x.Id);
+            sortedContenders.push(x);
+        });
+        sortedContenders = sortedContenders.sort((a, b) => b.Points - a.Points);
+        return sortedContenders;
+    }
     constructor(source) {
         _Solution_contenders.set(this, []);
         _Solution_rightGuesses.set(this, "");
@@ -42,11 +51,9 @@ class Solution {
     }
     getGuessesFromInputId(inputId) {
         if (inputId != "") {
-            if (inputId.length > 5)
-                return "A versenyző kódja nem lehet 5 karakternél több!";
-            const selectedContenter = this.getContenderById(inputId);
-            if (selectedContenter != null)
-                return selectedContenter.Guesses + " (a versenyző válasza)";
+            const selectedContender = this.getContenderById(inputId);
+            if (selectedContender != null)
+                return selectedContender.Guesses + " (a versenyző válasza)";
             return "Ilyen versenyző nincsen!";
         }
         return "";
@@ -96,22 +103,13 @@ class Solution {
         });
         fs_1.default.writeFileSync("pontok.txt", fileContent);
     }
-    getPointsSorted() {
-        let sortedContenders = [];
-        __classPrivateFieldGet(this, _Solution_contenders, "f").forEach(x => {
-            x.Points = this.getContendersPoints(x.Id);
-            sortedContenders.push(x);
-        });
-        sortedContenders = sortedContenders.sort((a, b) => b.Points - a.Points);
-        return sortedContenders;
-    }
-    showTheThreeBest(sorted) {
+    showTheThreeBest() {
         let output = "";
         let placement = 1;
-        for (let i = 0; i < sorted.length; i++) {
+        for (let i = 0; i < this.getSortedByPoints.length; i++) {
             if (placement <= 3) {
-                output += `\n${placement}. díj (${sorted[i].Points} pont): ${sorted[i].Id}`;
-                sorted[i].Points == sorted[i + 1].Points ? placement = placement : placement += 1;
+                output += `\n${placement}. díj (${this.getSortedByPoints[i].Points} pont): ${this.getSortedByPoints[i].Id}`;
+                this.getSortedByPoints[i].Points == this.getSortedByPoints[i + 1].Points ? placement = placement : placement += 1;
             }
             else {
                 return output;
