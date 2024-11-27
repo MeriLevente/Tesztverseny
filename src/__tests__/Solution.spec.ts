@@ -61,9 +61,9 @@ describe("6.feladat tesztelése", ()=>{
 
 describe("7.feladat tesztelése", ()=>{
     it("A legjobb eredményt helyesen írja ki", ()=>{
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (56 pont): JO001") //javítás szükséges
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (56 pont): JO001")
     })
     it("A képernyőre kiíratás 5 sorral tér vissza", ()=>{
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(5) //javítás szükséges
+        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(5)
     })
 })
