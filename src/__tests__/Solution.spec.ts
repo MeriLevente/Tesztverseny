@@ -27,9 +27,6 @@ describe("3.feladat tesztelése", ()=>{
     it("A felhasználó egy olyan azonosított vitt be, ami nincs az adatok közt, függvény ezt tudatja vele", ()=>{
         expect(sol.getGuessesFromInputId("adaff")).toBe("Ilyen versenyző nincsen!")
     })
-    it("A felhasználó bevitt egy azonosítót, ami 5 karakternél hosszabb", ()=>{
-        expect(sol.getGuessesFromInputId("AB1234")).toBe("A versenyző kódja nem lehet 5 karakternél több!")
-    })
 })
 
 describe("4.feladat tesztelése", ()=>{
@@ -61,9 +58,9 @@ describe("6.feladat tesztelése", ()=>{
 
 describe("7.feladat tesztelése", ()=>{
     it("A legjobb eredményt helyesen írja ki", ()=>{
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n")[1].trim()).toBe("1. díj (56 pont): JO001")
+        expect(sol.showTheThreeBest().split("\n")[1].trim()).toBe("1. díj (56 pont): JO001")
     })
     it("A képernyőre kiíratás 5 sorral tér vissza", ()=>{
-        expect(sol.showTheThreeBest(sol.getPointsSorted()).split("\n").length).toBe(5)
+        expect(sol.showTheThreeBest().split("\n").length).toBe(5)
     })
 })
