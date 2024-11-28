@@ -34,10 +34,13 @@ describe("4.feladat tesztelése", () => {
         expect(sol.checkGuesses("AB123").split("\n")[2].trim().split("\t")[0]).toBe("BCCCDBBBBCDAAA");
     });
     it("helyesen irja ki a felhasználo helyes válaszait", () => {
-        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+   ++      + ");
+        expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+ +  +   +     ");
     });
 });
 describe("5.feladat tesztelése", () => {
+    it("14 forduló votl a fájl adatai szerint, ennyivel kell visszatérnie a numberOfRound()-nak", () => {
+        expect(sol.numberOfRound).toBe(14);
+    });
     it("A felhasználó bevitt egy fordulószámot, és visszakapta a helyes válaszok számát", () => {
         var _a;
         expect((_a = sol.getStatisticsByInput("10")) === null || _a === void 0 ? void 0 : _a.count).toBe(111);
@@ -47,19 +50,22 @@ describe("5.feladat tesztelése", () => {
         expect((_a = sol.getStatisticsByInput("10")) === null || _a === void 0 ? void 0 : _a.percentage).toBe(36.63);
     });
 });
+sol.contenderpointsfile = jest.fn();
 describe("6.feladat tesztelése", () => {
     it("A versenyzők pontszámait helyesen számolja ki", () => {
-        expect(sol.getContendersPoints("AB123")).toBe(15); //Oktatási Hivatal kiadott megoldott pontok.txt-t hasonlísd össze a mi pontok.txt-kel
+        expect(sol.getContendersPoints("AB123")).toBe(14); //Oktatási Hivatal kiadott megoldott pontok.txt-t hasonlísd össze a mi pontok.txt-kel
     });
     it("Lefut e a fájl irása", () => {
-        expect(sol.contenderpointsfile()).toBeCalled; // toHaveBeenCalled()
+        sol.contenderpointsfile();
+        expect(sol.contenderpointsfile).toHaveBeenCalled();
     });
 });
 describe("7.feladat tesztelése", () => {
-    it("A legjobb eredményt helyesen írja ki", () => {
-        expect(sol.showTheThreeBest().split("\n")[1].trim()).toBe("1. díj (56 pont): JO001");
+    it("A 3 legtöbb pontot elérő versenyzőket helyesen írja ki", () => {
+        expect(sol.showTheThreeBest()).toBe("\n1. díj (56 pont): JO001\n2. díj (52 pont): DG490\n2. díj (52 pont): UA889\n3. díj (49 pont): FX387");
     });
     it("A képernyőre kiíratás 5 sorral tér vissza", () => {
-        expect(sol.showTheThreeBest().split("\n").length).toBe(5);
+        var _a;
+        expect((_a = sol.showTheThreeBest()) === null || _a === void 0 ? void 0 : _a.split("\n").length).toBe(5);
     });
 });

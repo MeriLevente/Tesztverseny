@@ -115,7 +115,6 @@ class Solution {
                 return output;
             }
         }
-        return output;
     }
 }
 _Solution_contenders = new WeakMap(), _Solution_rightGuesses = new WeakMap();

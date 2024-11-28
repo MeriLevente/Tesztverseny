@@ -106,7 +106,7 @@ export default class Solution{
 
     
 
-    showTheThreeBest(): string{
+    showTheThreeBest(): string | undefined{
         let output: string = ""
         let placement: number = 1
         for (let i = 0; i < this.getSortedByPoints.length; i++) {
@@ -117,6 +117,6 @@ export default class Solution{
                 return output
             }
         }
-        return output
+        
     }
 }
