@@ -8,6 +8,7 @@ const Content_1 = __importDefault(require("./Content"));
 class Program {
     constructor() {
         http_1.default.createServer(Content_1.default).listen(process.env.PORT || 8080);
+        console.log("http://localhost:8080/");
     }
 }
 new Program();

@@ -39,6 +39,12 @@
             "js",
             "json",
             "node"
+        ],
+        "collectCoverage": true,
+        "coverageDirectory": "coverage",
+        "collectCoverageFrom": [
+            "src/**/Contender.{ts,js}",
+            "src/**/Solution.{ts,js}"
         ]
-  }
+    }
 }
