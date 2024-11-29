@@ -43,7 +43,7 @@ class Solution {
                 __classPrivateFieldSet(this, _Solution_rightGuesses, x, "f");
         });
     }
-    countcontenders() {
+    countContenders() {
         return __classPrivateFieldGet(this, _Solution_contenders, "f").length;
     }
     getContenderById(id) {
@@ -78,7 +78,7 @@ class Solution {
             if (c.Guesses[Number(round) - 1] === __classPrivateFieldGet(this, _Solution_rightGuesses, "f")[Number(round) - 1])
                 correctContenders++;
         }
-        return { count: correctContenders, percentage: Number(((correctContenders / this.countcontenders()) * 100).toFixed(2)) };
+        return { count: correctContenders, percentage: Number(((correctContenders / this.countContenders()) * 100).toFixed(2)) };
     }
     getContendersPoints(id) {
         let points = 0;
@@ -96,7 +96,7 @@ class Solution {
         });
         return points;
     }
-    contenderpointsfile() {
+    writeContenderpointsFile() {
         let fileContent = "";
         __classPrivateFieldGet(this, _Solution_contenders, "f").forEach(x => {
             fileContent += x.Id + " " + this.getContendersPoints(x.Id) + "\n";

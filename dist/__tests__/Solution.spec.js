@@ -12,7 +12,7 @@ describe("1.feladat tesztelése", () => {
 });
 describe("2.feladat tesztelése", () => {
     it("helyesen számolja meg a versenzőket", () => {
-        expect(sol.countcontenders()).toBe(303);
+        expect(sol.countContenders()).toBe(303);
     });
 });
 describe("3.feladat tesztelése", () => {
@@ -36,6 +36,9 @@ describe("4.feladat tesztelése", () => {
     it("helyesen irja ki a felhasználo helyes válaszait", () => {
         expect(sol.checkGuesses("AB123").split("\n")[3]).toBe("+ +  +   +     ");
     });
+    it("Nem létező versenyző megadásakor üres stringgel tér vissza", () => {
+        expect(sol.checkGuesses("nemlétezik")).toBe("");
+    });
 });
 describe("5.feladat tesztelése", () => {
     it("14 forduló votl a fájl adatai szerint, ennyivel kell visszatérnie a numberOfRound()-nak", () => {
@@ -50,14 +53,14 @@ describe("5.feladat tesztelése", () => {
         expect((_a = sol.getStatisticsByInput("10")) === null || _a === void 0 ? void 0 : _a.percentage).toBe(36.63);
     });
 });
-sol.contenderpointsfile = jest.fn();
+sol.writeContenderpointsFile = jest.fn();
 describe("6.feladat tesztelése", () => {
     it("A versenyzők pontszámait helyesen számolja ki", () => {
-        expect(sol.getContendersPoints("AB123")).toBe(14); //Oktatási Hivatal kiadott megoldott pontok.txt-t hasonlísd össze a mi pontok.txt-kel
+        expect(sol.getContendersPoints("AB123")).toBe(14);
     });
     it("Lefut e a fájl irása", () => {
-        sol.contenderpointsfile();
-        expect(sol.contenderpointsfile).toHaveBeenCalled();
+        sol.writeContenderpointsFile();
+        expect(sol.writeContenderpointsFile).toHaveBeenCalled();
     });
 });
 describe("7.feladat tesztelése", () => {

@@ -30,7 +30,7 @@ function content(req, res) {
         inputRound = "";
     res.write('1. feladat: Az adatok beolvasása');
     res.write("<br>");
-    res.write('\n2.feladat: A vetélkedőn ' + sol.countcontenders() + ' versenyző indult.');
+    res.write('\n2. feladat: A vetélkedőn ' + sol.countContenders() + ' versenyző indult.');
     res.write("<br>");
     res.write(`\n3. feladat: A versenyző azonosítója = <input type='text' name='id' value='${inputId}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
     let guessesFromInputId = sol.getGuessesFromInputId(inputId);
@@ -41,14 +41,14 @@ function content(req, res) {
     res.write("<br>");
     res.write(`\n5. feladat: A feladat sorszáma = <input type='text' name='round' value='${inputRound}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
     if (inputRound != "") {
-        if (!parseInt(inputRound) || Number(inputRound) <= 0 || Number(inputRound) > sol.numberOfRound)
+        if (!parseInt(inputRound) || Number(inputRound) % 1 !== 0 || Number(inputRound) <= 0 || Number(inputRound) > sol.numberOfRound)
             res.write('Hibásan adta meg a fordulót!');
         else
             res.write(`A feladatra ${sol.getStatisticsByInput(inputRound).count} fő, a versenyzők ${sol.getStatisticsByInput(inputRound).percentage}%-a adott helyes választ.`);
     }
     res.write("<br>");
     res.write("\n6. feladat: A versenyzők pontszámának meghatározása");
-    sol.contenderpointsfile();
+    sol.writeContenderpointsFile();
     res.write("<br>");
     res.write(`\n7.feladat: A verseny legjobbjai: ${sol.showTheThreeBest()}`);
     res.write("</pre></form></body></html>");

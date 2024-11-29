@@ -37,7 +37,7 @@ export default class Solution{
         })
     }
 
-    countcontenders(): number{
+    countContenders(): number{
         return this.#contenders.length;
     }
 
@@ -76,7 +76,7 @@ export default class Solution{
             if(c.Guesses[Number(round)-1] === this.#rightGuesses[Number(round)-1])
                 correctContenders++;
         }
-        return {count: correctContenders, percentage: Number(((correctContenders / this.countcontenders()) * 100).toFixed(2))};
+        return {count: correctContenders, percentage: Number(((correctContenders / this.countContenders()) * 100).toFixed(2))};
     }
 
     getContendersPoints(id: string): number{
@@ -96,15 +96,13 @@ export default class Solution{
         return points
     }
 
-    contenderpointsfile(): void{
+    writeContenderpointsFile(): void{
         let fileContent: string = ""
         this.#contenders.forEach(x => {
             fileContent += x.Id + " " + this.getContendersPoints(x.Id) + "\n"
         })
         fs.writeFileSync("pontok.txt", fileContent)
     }
-
-    
 
     showTheThreeBest(): string | undefined{
         let output: string = ""
@@ -117,6 +115,5 @@ export default class Solution{
                 return output
             }
         }
-        
     }
 }
